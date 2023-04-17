@@ -1,4 +1,3 @@
-import sys
 import requests #pip install requests
 import time
 from time import sleep
