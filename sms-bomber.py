@@ -38,10 +38,14 @@ print('''
     Github: https://github.com/PinkOrca-net
     Telegram: @ThePinkOrca
     ''')
-number = input('Enter the victim number(9xxxxxxxxx) ~> ')
-if not number.isdigit() or len(number) != 10 or number[0] != '9':
-    print("Invalid input. Please enter a valid 10-digit phone number starting with '9'.")
-    exit()
+
+while True:
+    number = input('Enter the victim number(9xxxxxxxxx) ~> ')
+    if not number.isdigit() or len(number) != 10 or number[0] != '9':
+        print("Invalid input. Please enter a valid 10-digit phone number starting with '9'.")
+        continue
+
+    break
 
 ua = UserAgent()
 chars = string.ascii_letters + string.digits
