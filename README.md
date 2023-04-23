@@ -47,6 +47,10 @@ This program uses several APIs to send the text messages. The available APIs are
 - dalfak
 - dalfak
 - digicall
+- taaghche
+- bazar
+- tapsi
+- alibaba
 
 ## Usage:
 ___

